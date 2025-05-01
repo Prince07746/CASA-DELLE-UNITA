@@ -6,8 +6,8 @@
   <title>Casa Delle Unita</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
+      background-color: #adadad3a;
       color: #333;
       margin: 0;
       padding: 20px;
@@ -15,12 +15,31 @@
 
     h1 {
       text-align: center;
+      border: none;
+      
+    }
+    #week-number {
+      font-size: small;
+      color: rgb(61, 61, 61);
+    }
+
+    #t1{
+        color: rgb(94, 196, 94);
+    }
+    #t2{
+        color: white;
+        margin-left: 8px;
+        margin-right: 3px;
+    }
+    #t3{
+        color: red; 
     }
 
     #table-title {
       text-align: center;
-      font-size: 1.2em;
+      font-size: 1em;
       margin-top: 10px;
+      color: gray;
     }
 
     table {
@@ -61,7 +80,7 @@
 </head>
 <body>
 
-<h1>CASA DELLE UNITA</h1>
+<h1><span id="t1">CASA</span><span id="t2">DELLE</span> <span id="t3">UNITA</span><br> <span id="week-number"></span></h1>
 <h2 id="table-title">Weekly Schedule cucinare: <span id="week-range"></span></h2>
 
 <table>
@@ -121,7 +140,7 @@ const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
 
 
     
-    var people = [people1,people2,people3,people4,people5,people6];
+    var people = [people1,people2,people3,people4];
 
 
     var xWeek = getWeekOfMonth() - 1;
@@ -156,6 +175,7 @@ const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
     const adjustedDate = dayOfMonth + startDay;
     return Math.ceil(adjustedDate / 7);
   }
+  document.getElementById("week-number").textContent = `Week ${getWeekOfMonth()}`;
   
   
 </script>
