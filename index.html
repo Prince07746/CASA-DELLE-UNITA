@@ -79,7 +79,19 @@
   const dishesRow = document.getElementById("dishes-row");
   const membersRow = document.getElementById("members-row");
 
-  const people = ["Alpha", "Johnathan", "Jack", "Mawuwa", "Prince", "Melissa"];
+
+
+const people1 = ["Melissa", "Jack", "Alpha", "Johnathan", "Mawuwa", "Prince"];
+const people2 = ["Jack", "Alpha", "Johnathan", "Mawuwa", "Prince", "Melissa"];
+const people3 = ["Alpha", "Johnathan", "Mawuwa", "Prince", "Melissa", "Jack"];
+const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
+
+
+
+
+
+
+
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
   const diffToMonday = (dayOfWeek + 6) % 7; // how many days since Monday
@@ -95,6 +107,8 @@
 
   let weekRangeText = "";
 
+
+
   for (let i = 0; i < 7; i++) {
     const currentDate = new Date(weekStart);
     currentDate.setDate(weekStart.getDate() + i);
@@ -106,12 +120,18 @@
     daysHeader.appendChild(th);
 
 
+    
+    var people = [people1,people2,people3,people4,people5,people6];
+
+
+    var xWeek = getWeekOfMonth() - 1;
+    
     const tdMember = document.createElement("td");
-    tdMember.textContent = people[i % people.length];
+    tdMember.textContent = people[xWeek][i % people[xWeek].length];
     if (isToday) tdMember.classList.add("today");
     membersRow.appendChild(tdMember);
 
-    // Capture week start & end for title
+    // Capture week start & end for title don't worry guys it will be fixed later
     if (i === 0) {
       weekRangeText += `${days[i]} ${currentDate.getDate()} ${fullMonths[currentDate.getMonth()]}`;
     }
@@ -121,6 +141,23 @@
   }
 
   document.getElementById("week-range").textContent = weekRangeText;
+
+
+
+
+
+
+  function getWeekOfMonth(date = new Date()) {
+    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const startDay = startOfMonth.getDay(); // 0 (Sun) to 6 (Sat)
+    const dayOfMonth = date.getDate();
+  
+    // Adjusting the startDay: if Sunday is the first day of the week, keep as is.
+    const adjustedDate = dayOfMonth + startDay;
+    return Math.ceil(adjustedDate / 7);
+  }
+  
+  
 </script>
 
 </body>
