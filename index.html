@@ -201,6 +201,10 @@
       <th colspan="4">Total</th>
       <td id="food-stock-total">$35</td>
     </tr>
+    <tr>
+      <th colspan="4">Total week</th>
+      <td id="food-stock-total-week"></td>
+    </tr>
   </tfoot>
 </table>
 
@@ -339,7 +343,7 @@ const foodData = [
   {
     name: "Eggs",
     price: "2.35",
-    quantity: "12",
+    quantity: "7",
     times: "1",
     range: "week",
   },
@@ -395,7 +399,7 @@ const foodData = [
   {
     name: "Juice",
     price: "1.65",
-    quantity: "7",
+    quantity: "6",
     times: "1",
     range: "week",
   },
@@ -430,7 +434,7 @@ const foodData = [
   {
     name: "Fruits (Oranges, Apples, Bananas)",
     price: "2.79",
-    quantity: "10",
+    quantity: "7",
     times: "1",
     range: "week",
   },
@@ -500,7 +504,7 @@ const foodData = [
   {
     name: "Peppers",
     price: "2",
-    quantity: "1 kg",
+    quantity: "1",
     times: "1",
     range: "week",
   },
@@ -514,40 +518,70 @@ const foodData = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  const foodStockBody = document.getElementById("food-stock-body");
-
-  // Clear existing data in the table body
-  foodStockBody.innerHTML = "";
-
-  foodData.forEach((item) => {
-    const row = foodStockBody.insertRow();
-    const nameCell = row.insertCell();
-    const priceCell = row.insertCell();
-    const quantityCell = row.insertCell();
-    const timesCell = row.insertCell();
-    const rangeCell = row.insertCell();
-
-    nameCell.textContent = item.name;
-    priceCell.textContent = item.price;
-    quantityCell.textContent = item.quantity;
-    timesCell.textContent = item.times;
-    rangeCell.textContent = item.range;
-  });
-
-    // Calculate total price
-    const totalCell = document.getElementById("food-stock-total");
-    let totalPrice = 0;
-     foodData.forEach(item => {
-    //   // Add your price parsing logic here if the price is a range
-       const priceValue = parseFloat(item.price);
-       if (!isNaN(priceValue)) {
-         totalPrice += priceValue* parseInt(item.quantity);
+    const foodStockBody = document.getElementById("food-stock-body");
+  
+    // Clear existing data in the table body
+    foodStockBody.innerHTML = "";
+  
+    const getQuantity = (qty) => {
+      const match = qty.match(/\d+/);
+      return match ? parseInt(match[0]) : 1;
+    };
+  
+    const normalizeToMonth = (item) => {
+      const quantity = getQuantity(item.quantity);
+      const price = parseFloat(item.price);
+      const times = parseInt(item.times);
+      if (isNaN(price) || isNaN(times)) return 0;
+  
+      let frequency = 0;
+      const range = item.range.toLowerCase();
+  
+      if (range === "day") frequency = 30;
+      else if (range === "week") frequency = 4;
+      else if (range === "2 week") frequency = 2;
+      else if (range === "4 week") frequency = 1;
+      else if (range === "month") frequency = 1;
+      else frequency = 0; // unknown
+  
+      return price * quantity * times * frequency;
+    };
+  
+    let totalPriceMonth = 0;
+    let totalWeeklySpending = 0;
+  
+    foodData.forEach((item) => {
+      const row = foodStockBody.insertRow();
+      const nameCell = row.insertCell();
+      const priceCell = row.insertCell();
+      const quantityCell = row.insertCell();
+      const timesCell = row.insertCell();
+      const rangeCell = row.insertCell();
+  
+      nameCell.textContent = item.name;
+      priceCell.textContent = item.price;
+      quantityCell.textContent = item.quantity;
+      timesCell.textContent = item.times;
+      rangeCell.textContent = item.range;
+  
+      totalPriceMonth += normalizeToMonth(item);
+  
+      if (item.range === "week") {
+        const qty = getQuantity(item.quantity);
+        const price = parseFloat(item.price);
+        if (!isNaN(price)) {
+          totalWeeklySpending += price * qty * parseInt(item.times);
+        }
       }
-     });
-     totalCell.textContent = `€ ${totalPrice.toFixed(2)}`;
-
-});
-
+    });
+  
+    const totalCell = document.getElementById("food-stock-total");
+    totalCell.textContent = `€ ${totalPriceMonth.toFixed(2)} / month`;
+  
+    const totalCellWeek = document.getElementById("food-stock-total-week");
+    totalCellWeek.textContent = `€ ${totalWeeklySpending.toFixed(2)} / week`;
+  });
+  
 
 
 
