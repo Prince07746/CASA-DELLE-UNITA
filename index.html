@@ -64,8 +64,13 @@
       background-color: #fff;
     }
 
-    .today {
+    .todayCucinare {
       background-color: green !important;
+      color: white !important;
+      font-weight: bold;
+    }
+    .todayPulire {
+      background-color: red !important;
       color: white !important;
       font-weight: bold;
     }
@@ -172,10 +177,16 @@
     <tr id="days-header"></tr>
   </thead>
   <tbody>
-    <tr id="dishes-row"></tr>
     <tr id="members-row"></tr>
+    <tr id="cleaning-row"></tr>
   </tbody>
+  
+
 </table>
+
+
+
+
 
 
 <center>
@@ -222,9 +233,13 @@
 
 
 <script>
+
   const daysHeader = document.getElementById("days-header");
   const dishesRow = document.getElementById("dishes-row");
   const membersRow = document.getElementById("members-row");
+  const cleaningRow = document.getElementById("cleaning-row");
+
+
 
 
 
@@ -269,14 +284,26 @@ const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
 
     
     var people = [people1,people2,people3,people4];
+    var peopleCleaning = [people2,people3,people4,people1];
 
 
     var xWeek = getWeekOfMonth() - 1;
     
+  // Fill cucinare
     const tdMember = document.createElement("td");
     tdMember.textContent = people[xWeek][i % people[xWeek].length];
-    if (isToday) tdMember.classList.add("today");
+    if (isToday) tdMember.classList.add("todayCucinare");
     membersRow.appendChild(tdMember);
+
+
+
+      // Fill pulire
+  const tdClean = document.createElement("td");
+  tdClean.textContent = peopleCleaning[xWeek][i % peopleCleaning[xWeek].length]; // offset for variety
+  if (isToday) tdClean.classList.add("todayPulire");
+  cleaningRow.appendChild(tdClean);
+
+
 
     // Capture week start & end for title don't worry guys it will be fixed later
     if (i === 0) {
@@ -286,8 +313,11 @@ const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
       weekRangeText += ` - ${days[i]} ${currentDate.getDate()} ${fullMonths[currentDate.getMonth()]}`;
     }
   }
-
   document.getElementById("week-range").textContent = weekRangeText;
+
+
+
+
 
 
 
@@ -303,6 +333,9 @@ const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
     const adjustedDate = dayOfMonth + startDay;
     return Math.ceil(adjustedDate / 7);
   }
+
+
+
   document.getElementById("week-number").textContent = `Week ${getWeekOfMonth()}`;
   
 
