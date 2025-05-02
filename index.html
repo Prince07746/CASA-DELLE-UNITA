@@ -76,6 +76,90 @@
         overflow-x: auto;
       }
     }
+
+
+
+
+
+
+   /*  ====================================================================================================================  */
+   /*  ====================================================================================================================  */
+   /*  ====================================================================================================================  */
+
+
+   #food-stock-title {
+    text-align: center;
+    font-size: 1em;
+    margin-top: 20px;
+    color: #333;
+   }
+
+   #food-stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    transform: scale(0.95);
+  }
+  
+  #food-stock-table th, #food-stock-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  #food-stock-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  #food-stock-table td {
+    background-color: #fff;
+  }
+  
+  @media (max-width: 600px) {
+    #food-stock-table {
+      display: block;
+      overflow-x: auto;
+      font-size: smaller;
+    }
+    #food-stock-table th, #food-stock-table td {
+        border: 1px solid #ddd;
+        padding: 5px;
+        text-align: center;
+      }
+      
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /*  ====================================================================================================================  */
+   /*  ====================================================================================================================  */
+
+
+
+
+
+
   </style>
 </head>
 <body>
@@ -92,6 +176,46 @@
     <tr id="members-row"></tr>
   </tbody>
 </table>
+
+
+<center>
+<h2 id="food-stock-title">Food Stock Buying Table</h2>
+</center>
+
+<table id="food-stock-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price €</th>
+      <th>Quantity</th>
+      <th>Times of Buying</th>
+      <th>Range of Buying (Week/Day/Month)</th>
+    </tr>
+  </thead>
+  <tbody id="food-stock-body">
+    
+    <!-- Additional rows can go here -->
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4">Total</th>
+      <td id="food-stock-total">$35</td>
+    </tr>
+  </tfoot>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
   const daysHeader = document.getElementById("days-header");
@@ -177,6 +301,258 @@ const people4 = ["Johnathan", "Mawuwa", "Prince", "Melissa", "Jack", "Alpha"];
   }
   document.getElementById("week-number").textContent = `Week ${getWeekOfMonth()}`;
   
+
+
+
+
+
+
+
+
+
+
+
+/*    ============================================================================================================== */
+/*    ============================================================================================================== */
+/*    ============================================================================================================== */
+/*    ============================================================================================================== */
+
+
+
+
+
+const foodData = [
+  {
+    name: "Rice",
+    price: "12",
+    quantity: "2",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Pasta",
+    price: "2.99",
+    quantity: "5",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Eggs",
+    price: "2.35",
+    quantity: "12",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Onions",
+    price: "2.50",
+    quantity: "5",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Tomatoes",
+    price: "2.50",
+    quantity: "8",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Milk",
+    price: "1.89",
+    quantity: "5",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Toilet Paper",
+    price: "1.50",
+    quantity: "3",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Washing Soap",
+    price: "2.19",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Cleaning Soap",
+    price: "1.50",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "SOC Kabob",
+    price: "1.50",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Juice",
+    price: "1.65",
+    quantity: "7",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Meat (Chicken)",
+    price: "8",
+    quantity: "1",
+    times: "2",
+    range: "week",
+  },
+  {
+    name: "Meat (Beef)",
+    price: "11",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Meat (Pork)",
+    price: "5",
+    quantity: "2",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Irish",
+    price: "2.29",
+    quantity: "3",
+    times: "3",
+    range: "week",
+  },
+  {
+    name: "Fruits (Oranges, Apples, Bananas)",
+    price: "2.79",
+    quantity: "10",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Sweet Potatoes",
+    price: "3",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Bread",
+    price: "2.0",
+    quantity: "3",
+    times: "1",
+    range: "day",
+  },
+  {
+    name: "Farina (Flour)",
+    price: "3.50",
+    quantity: "6",
+    times: "1",
+    range: "month",
+  },
+  {
+    name: "Salt",
+    price: "1.50",
+    quantity: "2",
+    times: "1",
+    range: "month",
+  },
+  {
+    name: "Zucchero",
+    price: "1.20",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Tea/Caffè",
+    price: "2.49",
+    quantity: "2",
+    times: "1",
+    range: "month",
+  },
+  {
+    name: "Green Beans",
+    price: "2",
+    quantity: "1",
+    times: "2",
+    range: "week",
+  },
+  {
+    name: "Cabbage",
+    price: "1",
+    quantity: "1",
+    times: "1",
+    range: "2 week",
+  },
+  {
+    name: "Carrots",
+    price: "1",
+    quantity: "1",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Peppers",
+    price: "2",
+    quantity: "1 kg",
+    times: "1",
+    range: "week",
+  },
+  {
+    name: "Spices",
+    price: "2",
+    quantity: "7",
+    times: "1",
+    range: "4 week",
+  },
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const foodStockBody = document.getElementById("food-stock-body");
+
+  // Clear existing data in the table body
+  foodStockBody.innerHTML = "";
+
+  foodData.forEach((item) => {
+    const row = foodStockBody.insertRow();
+    const nameCell = row.insertCell();
+    const priceCell = row.insertCell();
+    const quantityCell = row.insertCell();
+    const timesCell = row.insertCell();
+    const rangeCell = row.insertCell();
+
+    nameCell.textContent = item.name;
+    priceCell.textContent = item.price;
+    quantityCell.textContent = item.quantity;
+    timesCell.textContent = item.times;
+    rangeCell.textContent = item.range;
+  });
+
+    // Calculate total price
+    const totalCell = document.getElementById("food-stock-total");
+    let totalPrice = 0;
+     foodData.forEach(item => {
+    //   // Add your price parsing logic here if the price is a range
+       const priceValue = parseFloat(item.price);
+       if (!isNaN(priceValue)) {
+         totalPrice += priceValue* parseInt(item.quantity);
+      }
+     });
+     totalCell.textContent = `€ ${totalPrice.toFixed(2)}`;
+
+});
+
+
+
+
+
+
   
 </script>
 
